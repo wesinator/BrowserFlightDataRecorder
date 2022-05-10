@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "InternetFlightDataRecorder",
+  "version": "1.0",
+  "description": "This extension saves websites you visited.",
+  "icons": {
+    "48": "icons/border-48.png"
+  },
+  "permissions": [
+    "downloads",
+    "unlimitedStorage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  }
+}
