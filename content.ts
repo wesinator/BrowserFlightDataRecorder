@@ -30,6 +30,10 @@ function sendPageInfo(): void {
         }
     }
 
+    for (let img of document.getElementsByTagName("img")) {
+        img.setAttribute("src", img.src);
+    }
+
     browser.runtime.sendMessage({
         type: "downloadHtml",
         date: new Date().toISOString(),
@@ -39,3 +43,4 @@ function sendPageInfo(): void {
 }
 
 addEventListener('beforeunload', event => { sendPageInfo(); });
+addEventListener('dblclick', event => { sendPageInfo(); });
