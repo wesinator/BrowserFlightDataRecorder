@@ -5,28 +5,14 @@ function sendPageInfo(): void {
     }
 
     for (let script of document.getElementsByTagName("script")) {
-        script.setAttribute("src", script.src);
+        if (script.hasAttribute("src")) {
+            script.setAttribute("src", script.src);
+        }
     }
 
     for (let link of document.getElementsByTagName("link")) {
-        if (link.rel === "stylesheet" || link.href.endsWith(".css")) {
+        if (link.rel === "stylesheet") {
             link.setAttribute("href", link.href);
-        }
-        if (link.getAttribute("data-href")?.endsWith(".css")) {
-            let dataHref = link.getAttribute("data-href");
-            if (dataHref?.startsWith("https://") || dataHref?.startsWith("http://")) {
-                link.setAttribute("href", dataHref);
-            } else {
-                if (dataHref?.charAt(0) === "/") {
-                    dataHref = dataHref.substring(1);
-                }
-
-                if (document.baseURI.endsWith("/")) {
-                    link.setAttribute("href", document.baseURI + dataHref);
-                } else {
-                    link.setAttribute("href", document.baseURI + "/" + dataHref);
-                }
-            }
         }
     }
 
@@ -42,5 +28,4 @@ function sendPageInfo(): void {
     });
 }
 
-addEventListener('beforeunload', event => { sendPageInfo(); });
-addEventListener('dblclick', event => { sendPageInfo(); });
+addEventListener("beforeunload", event => { sendPageInfo(); });

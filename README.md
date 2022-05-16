@@ -1,2 +1,2 @@
 # BrowserFlightDataRecorder
-A firefox extension to save html pages you visited.
+A firefox extension to automatically download webpages you visited as single HTML file
