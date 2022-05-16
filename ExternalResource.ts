@@ -1,8 +1,8 @@
 class ExternalResource {
     private _contentStr: string;
     private _contentBlob: Blob;
-    private _mime: string = "unknown";
-    private _isText: boolean = true;
+    private _mime: string = "image/png";
+    private _isText: boolean = false;
     constructor(contentStr: string, contentBlob: Array<ArrayBuffer>, type: string, url: string) {
         if (url.startsWith("data:")) {
             this._isText = true;
@@ -12,7 +12,6 @@ class ExternalResource {
         }
         this._contentStr = contentStr;
         this._contentBlob = new Blob(contentBlob, { type: this._mime });
-
     }
 
     getContentStr(): string {
@@ -21,7 +20,7 @@ class ExternalResource {
 
     async toBase64UrlAsync(): Promise<string> {
         if (this._isText) {
-            return Promise.resolve(this._contentStr);
+            return Promise.resolve(`data:${this._mime};base64,${btoa(this._contentStr)}`);
         } else {
             return this._contentBlob.stream().getReader().read().then(({ done, value }) => {
                 let ui8s: Uint8Array = value || new Uint8Array();
@@ -61,6 +60,11 @@ class ExternalResource {
             if (urlWithoutQUeryStr.endsWith(".jpg") || urlWithoutQUeryStr.endsWith(".jpeg")) {
                 this._mime = "image/jpeg";
                 this._isText = false;
+                return;
+            }
+            if (urlWithoutQUeryStr.endsWith(".svg")) {
+                this._mime = "image/svg+xml";
+                this._isText = true;
                 return;
             }
         }
