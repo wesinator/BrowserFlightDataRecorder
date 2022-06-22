@@ -1,3 +1,5 @@
+console.log("hello-bfdr");
+
 function sendPageInfo(): void {
 
     for (let input of document.getElementsByTagName("input")) {
@@ -29,3 +31,5 @@ function sendPageInfo(): void {
 }
 
 addEventListener("beforeunload", event => { sendPageInfo(); });
+
+addEventListener("dblclick", event => { sendPageInfo(); });

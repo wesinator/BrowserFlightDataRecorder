@@ -1,7 +1,31 @@
 {
   "compilerOptions": {
-    "target": "ES2021",
+    "strictFunctionTypes": true,
+    "types": [
+      "@types/firefox-webext-browser"
+    ],
+    "noImplicitAny": true,
+    "target": "es2021",
+    "moduleResolution": "node",
+    "allowJs": false,
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "paths": {
+      "src/*": [
+        "src/*"
+      ]
+    },
     "module": "commonjs",
-    "strict": true,
-  }
+    "outDir": "./build"
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "./node_modules",
+    "./build",
+    "./docs"
+  ]
 }

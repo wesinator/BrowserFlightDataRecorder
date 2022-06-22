@@ -1,7 +1,6 @@
 const BFDR_VERSION: string = "1.3.0";
 
-
-let externalResources: Map<string, ExternalResource> = new Map();;
+let externalResources: Map<string, ExternalResource> = new Map();
 
 function formatDate(date: Date): string {
     function zeroPadding(num: Number): string {
@@ -90,7 +89,7 @@ async function downloadAsHtml(msg: any): Promise<void> {
     });
 }
 
-function saveExternalResource(details): void {
+function saveExternalResource(details: any): void {
     let filter = browser.webRequest.filterResponseData(details.requestId);
 
     let decoder = new TextDecoder();

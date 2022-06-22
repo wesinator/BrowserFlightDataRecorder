@@ -8,7 +8,7 @@ class ExternalResource {
             this._isText = true;
             this._mime = url.split(";")[0].substring("data:".length);
         } else {
-            this.detectMime(type, url);
+            this.detectMimeAsync(type, url);
         }
         this._contentStr = contentStr;
         this._contentBlob = new Blob(contentBlob, { type: this._mime });
@@ -33,7 +33,7 @@ class ExternalResource {
         }
     }
 
-    private detectMime(type: string, url: string): void {
+    private async detectMimeAsync(type: string, url: string): Promise<void> {
         const urlWithoutQUeryStr = url.split("?")[0];
 
         if (type === "script") {
@@ -68,6 +68,13 @@ class ExternalResource {
                 return;
             }
         }
-        this._mime = "unknown";
+
+        try {
+            this._mime = await new DetectMime(this._contentBlob).detectAsync();
+            this._isText = false;
+            return;
+        } catch (e) {
+            this._mime = "unknown";
+        }
     }
 }

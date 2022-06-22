@@ -1,0 +1,16 @@
+{
+    "name": "browoserflightdatarecorder",
+    "version": "2.0.0",
+    "browserslist": [
+        "defaults"
+    ],
+    "scripts": {
+        "build:dev": "rm -rf ./build && cp -r ./static ./build && npm install && tsc -p tsconfig.json",
+        "build:release": "npm run build:dev"
+    },
+    "devDependencies": {
+        "@types/firefox-webext-browser": "^94.0.1",
+        "typescript": "^4.6.4"
+    },
+    "dependencies": {}
+}
