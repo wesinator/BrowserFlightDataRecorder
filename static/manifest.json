@@ -1,16 +1,13 @@
 {
   "manifest_version": 2,
   "name": "BrowserFlightDataRecorder",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A firefox extension to automatically download webpages you visited as single HTML file",
   "icons": {
     "48": "icons/border-48.png"
   },
   "permissions": [
-    "downloads",
-    "webRequest",
-    "webRequestBlocking",
-    "<all_urls>"
+    "downloads"
   ],
   "content_scripts": [
     {
@@ -25,7 +22,7 @@
   "background": {
     "scripts": [
       "background.js",
-      "ExternalResources.js"
+      "notifyTabId.js"
     ]
   }
 }

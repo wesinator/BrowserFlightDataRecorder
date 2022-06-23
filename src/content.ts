@@ -1,35 +1,22 @@
-console.log("hello-bfdr");
-
-function sendPageInfo(): void {
-
+function takeHtmlSnapshot(): string {
     for (let input of document.getElementsByTagName("input")) {
         input.setAttribute("value", input.value);
     }
 
-    for (let script of document.getElementsByTagName("script")) {
-        if (script.hasAttribute("src")) {
-            script.setAttribute("src", script.src);
-        }
-    }
+    return document.documentElement.outerHTML;
+}
 
-    for (let link of document.getElementsByTagName("link")) {
-        if (link.rel === "stylesheet") {
-            link.setAttribute("href", link.href);
-        }
-    }
-
-    for (let img of document.getElementsByTagName("img")) {
-        img.setAttribute("src", img.src);
-    }
-
+function sendPageInfo(html: string, tabId: Number): void {
     browser.runtime.sendMessage({
         type: "downloadHtml",
-        date: new Date().toISOString(),
+        timestamp: Date.now(),
         url: location.href,
-        html: document.documentElement.outerHTML,
+        html: html,
+        tabId: tabId,
     });
 }
 
-addEventListener("beforeunload", event => { sendPageInfo(); });
-
-addEventListener("dblclick", event => { sendPageInfo(); });
+browser.runtime.connect().onMessage.addListener((msg: any) => {
+    addEventListener("beforeunload", event => { sendPageInfo(takeHtmlSnapshot(), msg.tabId); });
+    addEventListener("dblclick", event => { sendPageInfo(takeHtmlSnapshot(), msg.tabId); });
+});
