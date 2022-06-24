@@ -7,7 +7,7 @@ function takeHtmlSnapshot(): string {
 }
 
 function sendPageInfo(html: string): void {
-    browser.runtime.sendMessage({ type: "getTabId" }).then(msg => {
+    browser.runtime.sendMessage({ type: "getTabId" }).then((msg: any) => {
         browser.runtime.sendMessage({
             type: "downloadHtml",
             timestamp: Date.now(),
