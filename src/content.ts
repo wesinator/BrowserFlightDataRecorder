@@ -6,7 +6,6 @@ function takeHtmlSnapshot(): string {
     return document.documentElement.outerHTML;
 }
 
-const port = browser.runtime.connect();
 function sendPageInfo(html: string): void {
     browser.runtime.sendMessage({ type: "getTabId" }).then(msg => {
         browser.runtime.sendMessage({
