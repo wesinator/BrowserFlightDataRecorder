@@ -23,17 +23,22 @@ function downloadHtmlOnBeforeUnload(msg: any): void {
         return url.split("/")[0];
     }
 
-    const timestamp: Number = Number(msg.timestamp);
-    const url: string = msg.url;
-    const html: string = msg.html;
-    const tabId: Number = Number(msg.tabId);
+    browser.storage.local.get(["downloadHtmlOnBeforeUnload",])
+        .then(data => {
+            if (data["downloadHtmlOnBeforeUnload"] === true) {
+                const timestamp: Number = Number(msg.timestamp);
+                const url: string = msg.url;
+                const html: string = msg.html;
+                const tabId: Number = Number(msg.tabId);
 
-    const bfdrContent = getBfdrHeader(url, timestamp, tabId) + "\n" + html;
+                const bfdrContent = getBfdrHeader(url, timestamp, tabId) + "\n" + html;
 
-    const blob = new Blob([bfdrContent], { type: "text/html" });
-    const downloadUrl = URL.createObjectURL(blob);
-    browser.downloads.download({
-        url: downloadUrl,
-        filename: `BFDR-${timestamp}.${getDomainFromUrl(url)}.html`,
-    });
+                const blob = new Blob([bfdrContent], { type: "text/html" });
+                const downloadUrl = URL.createObjectURL(blob);
+                browser.downloads.download({
+                    url: downloadUrl,
+                    filename: `BFDR-${timestamp}.${getDomainFromUrl(url)}.html`,
+                });
+            }
+        });
 }
