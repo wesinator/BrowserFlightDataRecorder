@@ -3,10 +3,13 @@ function downloadHtmlOnBeforeUnload(msg: any): void {
         let bfdrHeader = "";
         bfdrHeader += "BrowserFlightDataRecorder\n";
         bfdrHeader += `version:${BFDR_VERSION}\n`;
-        bfdrHeader += `timestamp:${timestamp}\n`;
+        bfdrHeader += "type:OnBeforeDowonload\n";
+
         bfdrHeader += `browserSessionId:${browserSessionId}\n`;
         bfdrHeader += `tabId:${tabId}\n`;
+
         bfdrHeader += `url:${url}\n`;
+        bfdrHeader += `timestamp:${timestamp}\n`;
 
         return bfdrHeader;
     }

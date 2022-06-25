@@ -3,6 +3,10 @@ function takeHtmlSnapshot(): string {
         input.setAttribute("value", input.value);
     }
 
+    for (let ta of document.getElementsByTagName("textarea")) {
+        ta.innerText = ta.value;
+    }
+
     return document.documentElement.outerHTML;
 }
 

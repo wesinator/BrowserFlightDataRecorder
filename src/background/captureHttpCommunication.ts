@@ -6,29 +6,39 @@ function saveResponseBody(details: browser.webRequest._OnBeforeRequestDetails): 
     if (!HttpCommunications.has(tabId)) {
         HttpCommunications.set(tabId, new Map<string, HttpCommunication>());
     }
-    HttpCommunications.get(tabId).set(requestId, new HttpCommunication());
-    HttpCommunications.get(tabId).get(requestId).setRequestBody(details.requestBody as string);
+    HttpCommunications.get(tabId).set(requestId, new HttpCommunication(tabId));
+
+    const reqBody = details.requestBody;
+    HttpCommunications.get(tabId).get(requestId).setRequestBody(reqBody === null ? "" : JSON.stringify(reqBody.formData));
 
     const filter = browser.webRequest.filterResponseData(requestId);
     const decorder = new TextDecoder();
     let responseBody = "";
+
     filter.ondata = event => {
         filter.write(event.data);
         responseBody += decorder.decode(event.data, { stream: true });
     };
+
     filter.onstop = event => {
         filter.close();
         HttpCommunications.get(tabId).get(requestId).setResponseBody(responseBody);
 
         const blob = new Blob([HttpCommunications.get(tabId).get(requestId).toString()], { type: "text/plain" });
         const downloadUrl = URL.createObjectURL(blob);
-        function getFilename(url: string): string {
-            const dirs = url.split("?")[0].split("/");
-            return dirs[dirs.length - 1];
+
+        function getDomainFromUrl(url: string): string {
+            if (url.startsWith("https://")) {
+                url = url.substring("https://".length);
+            } else if (url.startsWith("http://")) {
+                url = url.substring("http://".length);
+            }
+            return url.split("/")[0];
         }
+
         browser.downloads.download({
             url: downloadUrl,
-            filename: `BFDR-${Date.now()}.${getFilename(details.url)}`,
+            filename: `BFDR-${Date.now()}.${getDomainFromUrl(details.url)}.log`,
         });
     };
 }
