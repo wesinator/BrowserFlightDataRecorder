@@ -4,12 +4,14 @@ class HttpCommunication {
     private _requestUrl: string;
     private _requestTimestamp: Number;
     private _requestMethod: string;
+    private _requestOriginUrl: string;
     private _requestIp: string;
     private _requestProxyInfo: string;
 
     private _responseUrl: string;
     private _responseTimestamp: Number;
     private _responseMethod: string;
+    private _responseOriginUrl: string;
     private _responseIp: string;
     private _responseProxyInfo: string;
     private _statusLine: string;
@@ -30,6 +32,7 @@ class HttpCommunication {
         this._requestUrl = request.url;
         this._requestTimestamp = request.timeStamp;
         this._requestMethod = request.method;
+        this._requestOriginUrl = request.originUrl;
         this._requestIp = request.ip;
         this._requestProxyInfo = request.proxyInfo === null ? "" : JSON.stringify(request.proxyInfo);
 
@@ -46,6 +49,7 @@ class HttpCommunication {
         this._responseUrl = response.url;
         this._responseTimestamp = response.timeStamp;
         this._responseMethod = response.method;
+        this._responseOriginUrl = response.originUrl;
         this._responseIp = response.ip;
         this._responseProxyInfo = response.proxyInfo === null ? "" : JSON.stringify(response.proxyInfo);
 
@@ -95,12 +99,14 @@ class HttpCommunication {
         header += `requestUrl:${this._requestUrl}\n`;
         header += `requestTimestamp:${this._requestTimestamp}\n`;
         header += `requestMethod:${this._requestMethod}\n`;
+        header += `requestOriginUrl:${this._requestOriginUrl === undefined ? "" : this._requestOriginUrl}\n`;
         header += `requestIp:${this._requestIp === null ? "" : this._requestIp}\n`;
         header += `requestProxyInfo:${this._requestProxyInfo === null ? "" : this._requestProxyInfo}\n`;
 
         header += `responseUrl:${this._responseUrl}\n`;
         header += `responseTimestamp:${this._responseTimestamp}\n`;
         header += `responseMethod:${this._responseMethod}\n`;
+        header += `responseOriginUrl:${this._responseOriginUrl === undefined ? "" : this._responseOriginUrl}\n`;
         header += `responseIp:${this._responseIp === null ? "" : this._responseIp}\n`;
         header += `responseProxyInfo:${this._responseProxyInfo === null ? "" : this._responseProxyInfo}\n`;
         header += `statusLine:${this._statusLine}\n`;
