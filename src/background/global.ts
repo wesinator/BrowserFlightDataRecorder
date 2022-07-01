@@ -1,2 +1,2 @@
-const BFDR_VERSION = "3.1.0";
-const browserSessionId = Math.round(Math.random() * 10000000000000).toString();
+const BFDR_VERSION = "3.2.0";
+const browserSessionId = Math.random().toString().substring(2, 12);

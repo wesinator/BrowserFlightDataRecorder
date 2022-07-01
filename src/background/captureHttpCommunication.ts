@@ -41,7 +41,7 @@ function saveResponseBody(details: browser.webRequest._OnBeforeRequestDetails): 
 
                     browser.downloads.download({
                         url: downloadUrl,
-                        filename: `BFDR-${Date.now()}.${getDomainFromUrl(details.url)}.log`,
+                        filename: `BFDR-${Date.now()}.${Math.random().toString().substring(2, 7)}.${getDomainFromUrl(details.url)}.log`,
                     });
                 };
             }

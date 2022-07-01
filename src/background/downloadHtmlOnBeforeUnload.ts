@@ -37,7 +37,7 @@ function downloadHtmlOnBeforeUnload(msg: any): void {
                 const downloadUrl = URL.createObjectURL(blob);
                 browser.downloads.download({
                     url: downloadUrl,
-                    filename: `BFDR-${timestamp}.${getDomainFromUrl(url)}.html`,
+                    filename: `BFDR-${timestamp}.${Math.random().toString().substring(2, 7)}.${getDomainFromUrl(url)}.html`,
                 });
             }
         });
