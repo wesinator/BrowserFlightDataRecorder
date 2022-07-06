@@ -25,7 +25,7 @@ function downloadHtmlOnBeforeUnload(msg: any): void {
 
     browser.storage.local.get(["downloadHtmlOnBeforeUnload",])
         .then(data => {
-            if (data["downloadHtmlOnBeforeUnload"] === true) {
+            if (data["downloadHtmlOnBeforeUnload"] !== false) {
                 const timestamp: Number = Number(msg.timestamp);
                 const url: string = msg.url;
                 const html: string = msg.html;

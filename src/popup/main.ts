@@ -4,12 +4,12 @@ document.addEventListener("DOMContentLoaded", event => {
 
     browser.storage.local.get(["downloadHtmlOnBeforeUnload", "captureHttpCommunication"])
         .then(data => {
-            if (data["downloadHtmlOnBeforeUnload"] === true) {
+            if (data["downloadHtmlOnBeforeUnload"] !== false) {
                 downloadHtmlOnBeforeUnload.checked = true;
             } else {
                 downloadHtmlOnBeforeUnload.checked = false;
             }
-            if (data["captureHttpCommunication"] === true) {
+            if (data["captureHttpCommunication"] !== false) {
                 captureHttpCommunication.checked = true;
             } else {
                 captureHttpCommunication.checked = false;

@@ -3,7 +3,7 @@ let httpCommunications: Map<Number, Map<string, HttpCommunication>> = new Map<Nu
 function saveResponseBody(details: browser.webRequest._OnBeforeRequestDetails): void {
     browser.storage.local.get(["captureHttpCommunication",])
         .then(data => {
-            if (data["captureHttpCommunication"] === true) {
+            if (data["captureHttpCommunication"] !== false) {
                 const tabId: Number = details.tabId;
                 const requestId: string = details.requestId;
                 if (!httpCommunications.has(tabId)) {
