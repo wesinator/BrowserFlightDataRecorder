@@ -1,8 +1,152 @@
-main {
-    width: 700px;
-    margin: auto;
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: sans-serif;
 }
 
-img {
-    width: 100%;
+body {
+    background: #eeeeee;
+}
+
+main {
+    width: 900px;
+    margin: 0px auto;
+    background-color: #ffffff;
+}
+
+h1 {
+    height: 30px;
+    padding: 15px 5px 10px;
+    font-size: 30px;
+    color: #ffffff;
+    background: #1a73e7;
+}
+
+h1::before {
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+    display: inline-block;
+    content: "";
+    background-image: url("h1.png");
+    background-size: contain;
+    vertical-align: top;
+}
+
+a#top-link {
+    text-decoration: none;
+}
+
+nav {
+    height: 20px;
+    width: 880px;
+    padding: 10px 10px;
+    background: #0f3b74;
+}
+
+nav>a {
+    height: 20px;
+    width: 293px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: baseline;
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+img#top-image {
+    width: 700px;
+    margin: 0px 100px;
+}
+
+div#introduction,
+div#features,
+div#download,
+div#documents {
+    width: 860px;
+    margin: 0px 10px;
+    padding: 10px;
+}
+
+h2 {
+    margin: 2px 0px 5px;
+    font-size: 24px;
+    color: #206ccf;
+}
+
+h2::before {
+    height: 24px;
+    width: 24px;
+    margin-right: 10px;
+    display: inline-block;
+    content: "";
+    background-image: url("h2.png");
+    background-size: contain;
+    vertical-align: top;
+}
+
+h3 {
+    margin: 0px 10px 5px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #0f3b74;
+}
+
+
+
+a.download-button {
+    height: 32x;
+    width: 400px;
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 32px;
+    font-weight: 600;
+    display: block;
+    text-decoration: none;
+    border-radius: 10px;
+    color: #ffffff;
+    background: #1a73e7;
+    box-shadow: 5px 5px #0f3b74;
+}
+
+p {
+    margin: 0px 10px 10px;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: justify;
+}
+
+h3+p {
+    margin: 0px 10px 10px 20px;
+}
+
+table {
+    margin: 20px 0px;
+}
+
+caption {
+    padding: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #1a73e7;
+}
+
+tr:nth-child(odd) {
+    background-color: #ecf5ff;
+}
+
+th,
+td {
+    padding: 10px 5px;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: justify;
+}
+
+td:nth-child(1){
+    width: 200px;
 }
